@@ -51,16 +51,16 @@ Player.prototype.update = function() {
   }
 };
 Player.prototype.handleInput = function(input) {
-  if(input == 'left') {
+  if(input == 'left' && this.x > 0) {
     this.x -= 100;
   }
-  else if(input == 'up') {
+  else if(input == 'up' && this.y > 0) {
     this.y -= 83;
   }
-  else if(input == 'right') {
+  else if(input == 'right' && this.x < 400) {
     this.x += 100;
   }
-  else if(input == 'down') {
+  else if(input == 'down' && this.y < 405) {
     this.y += 83;
   }
   console.log(this.x,this.y);
