@@ -9,8 +9,9 @@ Character.prototype.render = function() {
 
 
 // Enemies our player must avoid
-var Enemy = function(startX, startY) {
+var Enemy = function(startX, startY, speed) {
     Character.call(this, startX, startY);
+    this.speed = speed;
 
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
@@ -28,7 +29,7 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.x += 100 * dt;
+    this.x += this.speed * dt;
     var deltaX = Math.abs(this.x - player.x);
     var deltaY = Math.abs(this.y - player.y);
     if(deltaX < 50 && deltaY < 50) {
@@ -72,7 +73,19 @@ Player.prototype.reset = function() {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-var allEnemies = [new Enemy(-100, 60)];
+var allEnemies = [];
+var startY = 63;
+for(var i = 0; i < 3; i++) {
+  var lastX = 100;
+  for(var j = 0; j < 100; j++) {
+    var startX = lastX - Math.floor(Math.random() * 500) - 100;
+    var speed = Math.floor(Math.random() * 200) + 50;
+    var enemy = new Enemy(startX, startY, speed);
+    allEnemies.push(enemy);
+    lastX = startX;
+  }
+  startY += 83;
+}
 var player = new Player(200, 405);
 
 // This listens for key presses and sends the keys to your
