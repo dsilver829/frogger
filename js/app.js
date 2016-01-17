@@ -32,8 +32,7 @@ Enemy.prototype.update = function(dt) {
     var deltaX = Math.abs(this.x - player.x);
     var deltaY = Math.abs(this.y - player.y);
     if(deltaX < 50 && deltaY < 50) {
-      player.x = 200;
-      player.y = 405;
+      player = new Player(200, 405);
     }
 };
 
@@ -47,6 +46,9 @@ var Player = function(startX, startY) {
 Player.prototype = Object.create(Character.prototype);
 Player.prototype.constructor = Player;
 Player.prototype.update = function() {
+  if(this.y < 50) {
+    player = new Player(200, 405);
+  }
 };
 Player.prototype.handleInput = function(input) {
   if(input == 'left') {
